@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 // API
-import API from "../API";
+import API, { Movie } from "../API";
 
 // Helpers
 import { isPersistedState } from "../helpers";
 
 const initialState = {
   page: 0,
-  results: [],
+  results: [] as Movie[],
   total_pages: 0,
   total_results: 0,
 };
@@ -22,7 +22,7 @@ export const useHomeFetch = () => {
 
   console.log(searchTerm);
 
-  const fetchMovies = async (page, searchTerm = "") => {
+  const fetchMovies = async (page: number, searchTerm = "") => {
     try {
       setError(false);
       setLoading(true);
@@ -46,12 +46,12 @@ export const useHomeFetch = () => {
       const sessionState = isPersistedState("homeState");
 
       if (sessionState) {
-        console.log('Grabbing from SessionStorage');
+        console.log("Grabbing from SessionStorage");
         setState(sessionState);
         return;
       }
     }
-    console.log('Grabbing from API');
+    console.log("Grabbing from API");
     setState(initialState);
     fetchMovies(1, searchTerm);
   }, [searchTerm]);
@@ -66,8 +66,8 @@ export const useHomeFetch = () => {
 
   // Write to sessionStorage
   useEffect(() => {
-    if(!searchTerm) {
-      sessionStorage.setItem('homeState', JSON.stringify(state));
+    if (!searchTerm) {
+      sessionStorage.setItem("homeState", JSON.stringify(state));
     }
   }, [searchTerm, state]);
 

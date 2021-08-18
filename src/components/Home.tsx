@@ -17,7 +17,7 @@ import { useHomeFetch } from "../hooks/useHomeFetch";
 // Image
 import NoImage from "../images/no_image.jpg";
 
-const Home = () => {
+const Home: React.FC = () => {
   const { state, loading, error, searchTerm, setSearchTerm, setIsLoadingMore } =
     useHomeFetch();
 
@@ -51,7 +51,7 @@ const Home = () => {
       </Grid>
       {loading && <Spinner />}
       {state.page < state.total_pages && !loading && (
-        <Button text="Load More" calllback={() => setIsLoadingMore(true)} />
+        <Button text="Load More" callback={() => setIsLoadingMore(true)} />
       )}
     </>
   );

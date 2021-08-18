@@ -1,6 +1,7 @@
 import React from "react";
 
 // Routing
+// @ts-ignore
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
 // Components
@@ -12,8 +13,8 @@ import NotFound from "./components/NotFound";
 // Styles
 import { GlobalStyle } from "./GlobalStyle";
 
-const App = () => (
-  <Router basename="/">
+const App: React.FC = () => (
+  <Router>
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
